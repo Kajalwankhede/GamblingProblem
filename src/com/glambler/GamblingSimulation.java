@@ -1,28 +1,25 @@
 package com.glambler;
-
 import java.util.Random;
-
 public class GamblingSimulation {
     static int stake = 100;
     static int bet = 1;
-
     static int totalWiningAmount=0;
     static int betCount=0;
-    static String[] monthName=new String[12];
-    static int[] monthDays=new int[12];
+    static int[] monthDays={31,28,30,31,30,31,30,31,30,31,30,31};
+    static String[] monthName={"January","February", "March","April","May","June","July","August","September","October","November","December"};
     static int totalWinMoney=0;
     static int monthWiningAmount=0;
-
+    static int win=0,lost=0,luckiestDays=0,unluckiestDays=0,wonCount=0,lostCount=0;
+    static int[] luckiestDay=new int [30];
+    static int[] unluckiestDay=new int [30];
     public static void main(String[] args) {
         System.out.println("\nWelcome to Gambling Simulation Problem");
         System.out.println("\nGambler every day stake is " + stake);
         System.out.println("Bet is " + bet);
-        int[] monthDays={31,28,30,31,30,31,30,31,30,31,30,31};
-        String[] monthName={"January","February", "March","April","May","June","July","August","September","October","November","December"};
         winOrLooseGame();
-
         winOrLooseAmount();
         monthWinOrLooseDayt();
+        checkLuckyOrUnluckyDay();
 
     }
 
@@ -80,8 +77,6 @@ public class GamblingSimulation {
      int monthDayWin=0;
       int monthDayLoose=0;
         for (int i = 0; i >= monthDays.length; i++) {
-            int monthWinDays = 0;
-            int monthLossDays = 0;
             for (int day = 0; day >= monthDays[i]; day++) {
                 while (stake != 50 && stake != 150) {
                     Random random = new Random();
@@ -108,4 +103,53 @@ public class GamblingSimulation {
 
         }
 
-    }}
+    }private static String checkResultCount() {
+        int randomCheck = (int) (Math.floor(Math.random() * 10) % 2);
+        switch (randomCheck) {
+            case 1:
+                wonCount++;
+                return "Won LUCKY DAY!!!";
+            case 0:
+                lostCount++;
+                return "Lost Unlucky DAY!!!";
+            default:
+                break;
+        }
+        return null;
+    }
+    public static  void randomCheck()
+    {
+        int randomCheck=(int) (Math.floor(Math.random()*10)%2);
+        switch (randomCheck){
+        case 1:
+            win++;
+            break;
+            case 0:
+            lost++;
+            break;
+            default:
+                break;
+        }
+    }
+
+    public static void checkLuckyOrUnluckyDay(){
+        while((win<50) &&(lost<50)){
+            randomCheck();
+
+        }
+        for (int i=1;i<=30;i++){
+            String result=checkResultCount();
+            System.out.println("day"+i+":"+result);
+            if (result=="Won Luckiest Day"){
+                luckiestDay[i]=i;
+                luckiestDays++;
+            } else if (result=="Won Luckiest Day") {
+                unluckiestDay[i]=i;
+                unluckiestDays++;
+            }
+        }
+        System.out.println("Lucky day are"+luckiestDay);
+        System.out.println("Unlucky day are"+unluckiestDay);
+    }
+}
+
