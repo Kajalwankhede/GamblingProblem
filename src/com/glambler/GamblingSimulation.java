@@ -150,6 +150,13 @@ public class GamblingSimulation {
         }
         System.out.println("Lucky day are"+luckiestDay);
         System.out.println("Unlucky day are"+unluckiestDay);
+        if (unluckiestDays>luckiestDays) {
+            System.out.println("Won: Do you want to continue playing next month or stop gambling..");
+        }
+        else {
+            System.out.println("Lost: Do you want to continue playing next month or stop gambling..");
+            winOrLooseGame();
+        }
     }
 }
 
